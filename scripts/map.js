@@ -11,54 +11,30 @@
         zoom: 8
       });
 
-      if (results.length > 1) {
-        // This handles multiple zips for one city search
-        results.forEach(function(city, idx) {
-          var marker = 'marker' + idx;
-          var infowindow = 'infowindow' + idx;
+      results.forEach(function(city, idx) {
+        var marker = 'marker' + idx;
+        var infowindow = 'infowindow' + idx;
 
-          map[infowindow] = new google.maps.InfoWindow({
-            content:
-            '<div>' +
-            '<h5>' + city.city + ', ' + city.state + '</h5>' +
-            '<p>Latitude: ' + city.latitude + '</p>' +
-            '<p>Longitude: ' + city.longitude + '</p>' +
-            '<p>Population: ' + city.population + '</p>' +
-            '</div>'
-          });
-
-          map[marker] = new google.maps.Marker({
-            position: {lat: city.latitude, lng: city.longitude},
-            map: map.map,
-            title: city.city + ', ' + city.state
-          })
-
-          map[marker].addListener('click', function() {
-            map[infowindow].open(map.map, map[marker]);
-          });
-        })
-      } else {
-        // This handles one single zip code location result on search
-        map.infowindow = new google.maps.InfoWindow({
+        map[infowindow] = new google.maps.InfoWindow({
           content:
           '<div>' +
-          '<h5>' + firstCity.city + ', ' + firstCity.state + '</h5>' +
-          '<p>Latitude: ' + firstCity.latitude + '</p>' +
-          '<p>Longitude: ' + firstCity.longitude + '</p>' +
-          '<p>Population: ' + firstCity.population + '</p>' +
+          '<h5>' + city.city + ', ' + city.state + '</h5>' +
+          '<p>Latitude: ' + city.latitude + '</p>' +
+          '<p>Longitude: ' + city.longitude + '</p>' +
+          '<p>Population: ' + city.population + '</p>' +
           '</div>'
         });
 
-        map.marker = new google.maps.Marker({
-          position: loc,
+        map[marker] = new google.maps.Marker({
+          position: {lat: city.latitude, lng: city.longitude},
           map: map.map,
-          title: 'Hello World!'
-        });
+          title: city.city + ', ' + city.state
+        })
 
-        map.marker.addListener('click', function() {
-          map.infowindow.open(map.map, map.marker);
+        map[marker].addListener('click', function() {
+          map[infowindow].open(map.map, map[marker]);
         });
-      }
+      })
     } else {
       // This handles default location on load
       var loc = {lat: 47.3623, lng: -122.1950};
