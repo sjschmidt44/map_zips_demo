@@ -10,6 +10,7 @@
   })()
 
   $('#state-select').on('change', function(e) {
+    $('#city-option').siblings().remove();
     webDB.execute('SELECT DISTINCT city FROM zips where state="' + $(this).val() + '" ORDER BY city', function(results) {
       if (results) $('#city-select').removeAttr('disabled');
       results.forEach(function(ele) {
