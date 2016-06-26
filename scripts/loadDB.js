@@ -4,13 +4,13 @@
   zips.createTable = function(callback) {
     webDB.execute(
       'CREATE TABLE IF NOT EXISTS zips (' +
-      'id SERIAL PRIMARY KEY, ' +
+      'id INTEGER PRIMARY KEY, ' +
       'city VARCHAR(255) NOT NULL, ' +
       'state VARCHAR(255) NOT NULL, ' +
       'latitude INTEGER NOT NULL,' +
       'longitude INTEGER NOT NULL,' +
       'population INTEGER NOT NULL,' +
-      'zip INTEGER NOT NULL)',
+      'zip VARCHAR(255) NOT NULL)',
       function(result) {
         console.log('Successfully set up the zips table.', result);
         if (callback) callback();
