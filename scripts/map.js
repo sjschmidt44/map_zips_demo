@@ -59,7 +59,5 @@
       });
     }
   }
-
-  module.map = map;
   module.initMap = initMap;
 })(window)
