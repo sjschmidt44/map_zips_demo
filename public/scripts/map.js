@@ -37,6 +37,7 @@
         map[marker].addListener('click', () => map[infowindow].open(map.map, map[marker]))
       })
     } else {
+      console.log('Default map')
       // This handles default location on load
       let loc = {lat: 47.3623, lng: -122.1950}
       map.map = new google.maps.Map(document.getElementById('map'), {
