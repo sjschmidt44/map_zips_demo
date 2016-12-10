@@ -1,0 +1,22 @@
+{
+  "name": "zip-codes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjschmidt44/map_zips_demo.git"
+  },
+  "author": "Scott Schmidt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sjschmidt44/map_zips_demo/issues"
+  },
+  "homepage": "https://github.com/sjschmidt44/map_zips_demo#readme",
+  "dependencies": {
+    "pg": "^6.1.0"
+  }
+}
