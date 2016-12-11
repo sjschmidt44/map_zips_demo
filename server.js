@@ -11,15 +11,15 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('/api/zip', (req, res) => {
-  const {zip} = req.query
+  const zip = req.query.zip
   const client = new pg.Client(conString)
 
   client.connect(err => {
     if(err) console.error('could not connect to postgres', err)
 
-    client.query(`SELECT * FROM zips WHERE zip=${zip}`, (err, result) => {
+    client.query(`SELECT * FROM zips WHERE zip=$1`, [zip], (err, result) => {
       if(err) console.error('error running query', err)
-      res.json(result)
+      res.json(result.rows)
       client.end()
     })
   })
@@ -33,26 +33,43 @@ app.get('/api/state', (req, res) => {
 
     client.query('SELECT DISTINCT state FROM zips ORDER BY state', (err, result) => {
       if(err) console.error('error running query', err)
-      res.json(result)
+      res.json(result.rows)
       client.end()
     })
   })
 })
 
 app.get('/api/city', (req, res) => {
-  const {city, state} = req.query
+  const state = req.query.state
   const client = new pg.Client(conString)
 
   client.connect(err => {
     if(err) console.error('could not connect to postgres', err)
 
-    client.query('SELECT * FROM zips WHERE city=${city} AND state=${state}', (err, result) => {
+    client.query('SELECT DISTINCT city FROM zips WHERE state=$1 ORDER BY city', [state], (err, result) => {
       if(err) console.error('error running query', err)
-      res.json(result)
+      res.json(result.rows)
       client.end()
     })
   })
 })
+
+app.get('/api/location', (req, res) => {
+  const state = req.query.state
+  const city = req.query.city
+  const client = new pg.Client(conString)
+
+  client.connect(err => {
+    if(err) console.error('could not connect to postgres', err)
+
+    client.query('SELECT * FROM zips WHERE state=$1 AND city=$2 ORDER BY city', [state, city], (err, result) => {
+      if(err) console.error('error running query', err)
+      res.json(result.rows)
+      client.end()
+    })
+  })
+})
+
 
 app.get('/', (req, res) => {
   console.log('got to home');

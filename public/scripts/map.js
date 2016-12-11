@@ -4,9 +4,10 @@
   let map = {}
 
   function initMap(results) {
+    console.log(results);
     if (results) {
       let firstCity = results[0]
-      let loc = {lat: firstCity.latitude, lng: firstCity.longitude}
+      let loc = {lat: parseFloat(firstCity.latitude), lng: parseFloat(firstCity.longitude)}
       map.map = new google.maps.Map(document.getElementById('map'), {
         center: loc,
         scrollwheel: true,
@@ -29,7 +30,7 @@
         })
 
         map[marker] = new google.maps.Marker({
-          position: {lat: city.latitude, lng: city.longitude},
+          position: {lat: parseFloat(city.latitude), lng: parseFloat(city.longitude)},
           map: map.map,
           title: `${city.city}, ${city.state}`
         })
