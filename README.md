@@ -14,12 +14,13 @@ Your goal with this assignment is to exercise your sql query skills in working w
     - This script will connect to your local postgres database, and populate the zip codes as records in the DB.
     - *NOTE* It will take approx. 5-10 seconds for this script to complete all 30,000 records. When complete, you will see `files loaded successfully` in your terminal, and your command prompt will return.
   - You should now be able to start postgres using `psql`, and run `SELECT COUNT(*) from zips;`, which will return the following:
-    ```shell
-      count
-      -------
-      29467
-      (1 row)
-    ```
+
+      ```shell
+        count
+        -------
+        29467
+        (1 row)
+      ```
 
 #### Write your code
 3. Populate the select elements for State and City using data from the Postgres DB table.
