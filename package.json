@@ -2,7 +2,7 @@
   "name": "zip-codes",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +18,8 @@
   "homepage": "https://github.com/sjschmidt44/map_zips_demo#readme",
   "dependencies": {
     "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
     "pg": "^6.1.0"
   }
 }

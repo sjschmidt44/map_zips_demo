@@ -4,9 +4,10 @@
   let map = {}
 
   function initMap(results) {
+    console.log(results);
     if (results) {
       let firstCity = results[0]
-      let loc = {lat: firstCity.latitude, lng: firstCity.longitude}
+      let loc = {lat: parseFloat(firstCity.latitude), lng: parseFloat(firstCity.longitude)}
       map.map = new google.maps.Map(document.getElementById('map'), {
         center: loc,
         scrollwheel: true,
@@ -29,7 +30,7 @@
         })
 
         map[marker] = new google.maps.Marker({
-          position: {lat: city.latitude, lng: city.longitude},
+          position: {lat: parseFloat(city.latitude), lng: parseFloat(city.longitude)},
           map: map.map,
           title: `${city.city}, ${city.state}`
         })
@@ -37,6 +38,7 @@
         map[marker].addListener('click', () => map[infowindow].open(map.map, map[marker]))
       })
     } else {
+      console.log('Default map')
       // This handles default location on load
       let loc = {lat: 47.3623, lng: -122.1950}
       map.map = new google.maps.Map(document.getElementById('map'), {
